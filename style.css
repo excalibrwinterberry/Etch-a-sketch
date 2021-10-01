@@ -1,0 +1,11 @@
+.container{
+    display: grid;
+    height: 700px;
+    width: 700px;
+    background: LightGray;
+    display: grid;
+}
+
+.chosen{
+    background-color: darkcyan;
+}
