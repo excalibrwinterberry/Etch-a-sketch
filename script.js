@@ -1,4 +1,5 @@
 function setGrid(containerTag,n){
+    eraser.checked = false
     container.innerHTML = ""
     container.style.gridTemplateColumns = `repeat(${n}, 2fr)`
     container.style.gridTemplateRows = `repeat(${n}, 2fr)`
@@ -20,6 +21,24 @@ function revertColor(tag){
     document.getElementById(`${tag.id}`).style.backgroundColor = defaultColor
 }
 
+function revertColorEvent(event){
+    document.getElementById(`${event.target.id}`).style.backgroundColor = defaultColor
+}
+
+function eraserEvent(event) {
+    const grid = [...container.children]
+    console.log("eraser event triggered")
+    if(event.target.checked){
+        grid.forEach((cell)=>{
+            cell.addEventListener("mouseenter", revertColorEvent)
+        })
+    }else{
+        grid.forEach((cell)=>{
+            cell.removeEventListener("mouseenter", revertColorEvent)
+        })
+    }
+}
+
 let n =16
 
 const dimensionTag = document.getElementById("dimension")
@@ -31,6 +50,9 @@ const container = document.getElementsByClassName("container")[0]
 
 const drawColor = "black"
 const defaultColor = "LightGray"
+
+const eraser = document.getElementById("eraser")
+eraser.addEventListener("change", eraserEvent)
 
 
 
@@ -53,4 +75,3 @@ document.querySelector("#clear").addEventListener("click", (e)=>{
     })
     
 })
-
