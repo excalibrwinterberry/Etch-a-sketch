@@ -1,3 +1,4 @@
+//setiing up grid everytime the user changes the dimensions
 function setGrid(containerTag,n){
     eraser.checked = false
     brushStroke[0].checked = true 
@@ -13,19 +14,22 @@ function setGrid(containerTag,n){
     
 }
 
-
+//event handler to change the color to black
 function changeColor(event){
     document.getElementById(`${event.target.id}`).style.backgroundColor = drawColor
 }
 
+//for clear tag to set all the color of cells to default
 function revertColor(tag){
     document.getElementById(`${tag.id}`).style.backgroundColor = defaultColor
 }
 
+//event handler for eraser event to convert color of brush to default
 function revertColorEvent(event){
     document.getElementById(`${event.target.id}`).style.backgroundColor = defaultColor
 }
 
+//handling eraser event
 function eraserEvent(event) {
     const grid = [...container.children]
     if(event.target.checked){
@@ -39,6 +43,7 @@ function eraserEvent(event) {
     }
 }
 
+//when brush stroke is set to rainbow
 function rainbowEvent(event) {
     document.getElementById(`${event.target.id}`).style.backgroundColor = rainbowColors[visited]
     visited = (visited === 6) ? 0 : visited+1
@@ -65,9 +70,10 @@ eraser.addEventListener("change", eraserEvent)
 const brushStroke = document.querySelectorAll('input[name="brush"]')
 
 
-
+//setting up initial grid on load
 setGrid(container, n)
 
+//changing dimension as per user input
 dimensionTag.oninput = function() {
     n = parseInt(this.value)
     dimensionDisplay.textContent = n
@@ -86,9 +92,7 @@ document.querySelector("#clear").addEventListener("click", (e)=>{
     
 })
 
-
 //rainbow 
-
 
 brushStroke.forEach((strokes)=>{
     strokes.addEventListener('change', (event)=>{
